@@ -3,18 +3,19 @@ using User.Domain.Core.Bus;
 using User.Domain.Core.Commands;
 using User.Domain.Core.Events;
 using MediatR;
+using System.Threading.Tasks;
 
 namespace User.CrossCutting.Bus
 {
-    private readonly IMediator mediator;
-
     public class InMemoryBus : IMediatorHandler
     {
+        private readonly IMediator mediator;
+
         public InMemoryBus(IMediator mediator)
         {
             this.mediator = mediator;
         }
-          public Task SendCommand<T>(T command) where T : Command
+        public Task SendCommand<T>(T command) where T : Command
         {
             return Publish(command);
         }
@@ -26,7 +27,7 @@ namespace User.CrossCutting.Bus
 
         private Task Publish<T>(T message) where T : Message
         {
-            return _mediator.Publish(message);
+            return mediator.Publish(message);
         }
     }
 }
