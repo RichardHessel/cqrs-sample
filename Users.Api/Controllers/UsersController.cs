@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using User.Domain.Core.Bus;
@@ -12,22 +13,25 @@ namespace Users.Api.Controllers
     public class UsersController : ApiController
     {
         private readonly IMediatorHandler Bus;
+        private readonly IMapper mapper;
 
-        protected UsersController(
+        public UsersController(
             INotificationHandler<DomainNotification> notifications,
-            IMediatorHandler bus
+            IMediatorHandler bus,
+            IMapper mapper
             ) : base(notifications)
         {
             this.Bus = bus;
+            this.mapper = mapper;
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostUserAsync(NewUserModel model)
+        public async Task<IActionResult> PostUserAsync([FromBody]NewUserModel model)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            CreateUserCommand command = null; //TODO: Mapper.Map(user)
+            CreateUserCommand command = mapper.Map<CreateUserCommand>(model); //TODO: Mapper.Map(user)
 
             await Bus.SendCommand(command);
 

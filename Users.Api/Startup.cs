@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Users.Api.Mapping;
 using Users.CrossCutting.IoC;
 
 namespace User.Presentation
@@ -23,8 +25,14 @@ namespace User.Presentation
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAutoMapper();   
+            services.AddAutoMapper();
+
+            services.AddSingleton(AutoMapperConfig.RegisterMappings().CreateMapper());
+
             services.AddMvc();
+
+            services.AddMediatR(typeof(Startup));
+
             services.RegisterServices();
         }
 
