@@ -1,4 +1,4 @@
-using User.Domain.Core.Commands;
+using Users.Domain.Core.Commands;
 
 namespace Users.Domain.Commands.User
 {

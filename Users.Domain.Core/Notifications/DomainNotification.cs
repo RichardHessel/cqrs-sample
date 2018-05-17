@@ -1,7 +1,7 @@
 using System;
 using Users.Domain.Core.Events;
 
-namespace User.Domain.Core.Notifications
+namespace Users.Domain.Core.Notifications
 {
     public class DomainNotification : Event
     {

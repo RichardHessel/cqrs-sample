@@ -2,8 +2,8 @@ using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using User.Domain.Core.Bus;
-using User.Domain.Core.Notifications;
+using Users.Domain.Core.Bus;
+using Users.Domain.Core.Notifications;
 using Users.Api.Models.RegisterUser;
 using Users.Domain.Commands.User;
 
@@ -31,7 +31,7 @@ namespace Users.Api.Controllers
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            CreateUserCommand command = mapper.Map<CreateUserCommand>(model); //TODO: Mapper.Map(user)
+            CreateUserCommand command = mapper.Map<CreateUserCommand>(model);
 
             await Bus.SendCommand(command);
 

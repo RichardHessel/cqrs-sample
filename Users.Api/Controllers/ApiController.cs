@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using User.Domain.Core.Notifications;
+using Users.Domain.Core.Notifications;
 
 namespace Users.Api.Controllers
 {

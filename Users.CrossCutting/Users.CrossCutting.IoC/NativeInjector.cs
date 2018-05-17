@@ -1,8 +1,8 @@
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using User.CrossCutting.Bus;
-using User.Domain.Core.Bus;
-using User.Domain.Core.Notifications;
+using Users.CrossCutting.Bus;
+using Users.Domain.Core.Bus;
+using Users.Domain.Core.Notifications;
 using Users.Domain.CommandHandlers;
 using Users.Domain.Commands.User;
 using Users.Domain.EventHandlers;

@@ -1,9 +1,9 @@
 
 using System.Threading.Tasks;
-using User.Domain.Core.Commands;
+using Users.Domain.Core.Commands;
 using Users.Domain.Core.Events;
 
-namespace User.Domain.Core.Bus
+namespace Users.Domain.Core.Bus
 {
     public interface IMediatorHandler
     {

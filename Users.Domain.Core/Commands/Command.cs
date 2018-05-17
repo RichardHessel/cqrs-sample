@@ -2,7 +2,7 @@ using System;
 using FluentValidation.Results;
 using Users.Domain.Core.Events;
 
-namespace User.Domain.Core.Commands
+namespace Users.Domain.Core.Commands
 {
     public abstract class Command : Message
     {

@@ -1,11 +1,11 @@
 using System;
 using MediatR;
 using System.Threading.Tasks;
-using User.Domain.Core.Bus;
-using User.Domain.Core.Commands;
+using Users.Domain.Core.Bus;
+using Users.Domain.Core.Commands;
 using Users.Domain.Core.Events;
 
-namespace User.CrossCutting.Bus
+namespace Users.CrossCutting.Bus
 {
     public class InMemoryBus : IMediatorHandler
     {

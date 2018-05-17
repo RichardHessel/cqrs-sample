@@ -1,7 +1,7 @@
 using MediatR;
-using User.Domain.Core.Bus;
-using User.Domain.Core.Commands;
-using User.Domain.Core.Notifications;
+using Users.Domain.Core.Bus;
+using Users.Domain.Core.Commands;
+using Users.Domain.Core.Notifications;
 using Users.Domain.Interfaces;
 
 namespace Users.Domain.CommandHandlers

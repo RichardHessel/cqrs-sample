@@ -1,12 +1,13 @@
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
-using User.Domain.Core.Bus;
-using User.Domain.Core.Notifications;
+using Users.Domain.Core.Bus;
 using Users.Domain.Commands.User;
 using Users.Domain.Events;
 using Users.Domain.Interfaces;
 using Users.Domain.Interfaces.Repositories;
+using Users.Domain.Core.Notifications;
+using Users.Domain.Entities;
 
 namespace Users.Domain.CommandHandlers
 {
@@ -31,7 +32,7 @@ namespace Users.Domain.CommandHandlers
                 NotifyValidationErrors(message);
                 return;
             }
-            Domain.Entities.User user = new Domain.Entities.User(message.Name, message.Email, message.Password);
+            User user = new User(message.Name, message.Email, message.Password);
 
             if (await userRepository.GetByMailAsync(user.Email) != null)
             {
