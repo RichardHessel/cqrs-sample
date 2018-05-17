@@ -12,7 +12,7 @@ using Users.Domain.Entities;
 namespace Users.Domain.CommandHandlers
 {
     public class UserCommandHandler : CommandHandler,
-    INotificationHandler<CreateUserCommand>
+    IRequestHandler<CreateUserCommand>
     {
         private readonly IUserRepository userRepository;
         private readonly IMediatorHandler Bus;

@@ -17,7 +17,7 @@ namespace Users.CrossCutting.Bus
         }
         public Task SendCommand<T>(T command) where T : Command
         {
-            return Publish(command);
+            return mediator.Send(command);
         }
 
         public Task RaiseEvent<T>(T @event) where T : Event
@@ -25,7 +25,7 @@ namespace Users.CrossCutting.Bus
             return Publish(@event);
         }
 
-        private Task Publish<T>(T message) where T : Message
+        private Task Publish<T>(T message) where T : Event
         {
             return mediator.Publish(message);
         }

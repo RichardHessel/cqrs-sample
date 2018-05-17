@@ -25,7 +25,7 @@ namespace Users.CrossCutting.IoC
             services.AddScoped<INotificationHandler<UserRegisteredEvent>, UserEventHandler>();
 
             // commands
-            services.AddScoped<INotificationHandler<CreateUserCommand>, UserCommandHandler>();
+            services.AddScoped<IRequestHandler<CreateUserCommand>, UserCommandHandler>();
 
 
             // infra 
