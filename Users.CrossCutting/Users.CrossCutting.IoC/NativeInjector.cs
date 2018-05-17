@@ -24,6 +24,9 @@ namespace Users.CrossCutting.IoC
             // commands
             services.AddScoped<INotificationHandler<CreateUserCommand>, UserCommandHandler>();
 
+            // mapper
+            services.AddSingleton(Mapping.AutoMapperConfig.RegisterMappings().CreateMapper());
+            
         }
     }
 }
