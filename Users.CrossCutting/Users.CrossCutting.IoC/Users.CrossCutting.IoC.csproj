@@ -10,6 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Users.Domain.Core\Users.Domain.Core.csproj" />
     <ProjectReference Include="..\..\Users.Domain\Users.Domain.csproj" />
+    <ProjectReference Include="..\..\Users.Infra.Persistence\Users.Infra.Persistence.csproj" />
     <ProjectReference Include="..\Users.CrossCutting.Bus\Users.CrossCutting.Bus.csproj" />
   </ItemGroup>
 
