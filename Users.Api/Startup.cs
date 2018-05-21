@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Users.Api.Mapping;
 using Users.CrossCutting.IoC;
 
-namespace User.Presentation
+namespace Users.Api
 {
     public class Startup
     {

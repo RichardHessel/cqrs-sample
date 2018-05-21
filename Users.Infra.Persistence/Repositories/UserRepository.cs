@@ -9,14 +9,14 @@ namespace Users.Infra.Persistence.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        public Task AddAsync(Domain.Entities.User user)
+        public Task AddAsync(User user)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Domain.Entities.User> GetByMailAsync(string email)
+        public async Task<User> GetByMailAsync(string email)
         {
-            throw new NotImplementedException();
+            return new User("richard", "richardrodrigues_h@outlook.com", "Teste@123");
         }
     }
 }

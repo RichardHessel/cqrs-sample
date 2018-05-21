@@ -6,6 +6,7 @@ using Users.Domain.Core.Bus;
 using Users.Domain.Core.Notifications;
 using Users.Api.Models.RegisterUser;
 using Users.Domain.Commands.User;
+using Users.Domain.Interfaces.Repositories;
 
 namespace Users.Api.Controllers
 {
@@ -14,15 +15,18 @@ namespace Users.Api.Controllers
     {
         private readonly IMediatorHandler Bus;
         private readonly IMapper mapper;
+        private readonly IUserRepository userRepository;
 
         public UsersController(
             INotificationHandler<DomainNotification> notifications,
             IMediatorHandler bus,
-            IMapper mapper
+            IMapper mapper,
+            IUserRepository userRepository
             ) : base(notifications)
         {
             this.Bus = bus;
             this.mapper = mapper;
+            this.userRepository = userRepository;
         }
 
         [HttpPost]
@@ -36,6 +40,13 @@ namespace Users.Api.Controllers
             await Bus.SendCommand(command);
 
             return Response(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetUserAsync(string email)
+        {
+            var data = await userRepository.GetByMailAsync(email);
+            return Ok(data);
         }
     }
 }
