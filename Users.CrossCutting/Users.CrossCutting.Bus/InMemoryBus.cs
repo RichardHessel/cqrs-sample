@@ -29,5 +29,10 @@ namespace Users.CrossCutting.Bus
         {
             return mediator.Publish(message);
         }
+
+        public Task<TResponse> Execute<TResponse>(IRequest<TResponse> query)
+        {
+            return mediator.Send(query);
+        }
     }
 }

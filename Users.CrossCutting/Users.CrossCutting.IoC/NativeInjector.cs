@@ -10,6 +10,9 @@ using Users.Domain.Events;
 using Users.Domain.Interfaces;
 using Users.Domain.Interfaces.Repositories;
 using Users.Infra.Persistence.Repositories;
+using Users.Domain.QuerySide.Queries.Users;
+using Users.Domain.QuerySide.QueryHandlers.Users;
+using Users.Domain.Entities;
 
 namespace Users.CrossCutting.IoC
 {
@@ -26,6 +29,9 @@ namespace Users.CrossCutting.IoC
 
             // commands
             services.AddScoped<IRequestHandler<CreateUserCommand>, UserCommandHandler>();
+
+            // queries
+            services.AddScoped<IRequestHandler<GetUserByMailQuery, User>, UserQueryHandler>();
 
 
             // infra 

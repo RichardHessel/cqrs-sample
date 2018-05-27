@@ -7,6 +7,9 @@ using Users.Domain.Core.Notifications;
 using Users.Api.Models.RegisterUser;
 using Users.Domain.Commands.User;
 using Users.Domain.Interfaces.Repositories;
+using Users.Domain.QuerySide.Queries.Users;
+using Users.Domain.Entities;
+using Users.Api.Models.GetUser;
 
 namespace Users.Api.Controllers
 {
@@ -45,8 +48,8 @@ namespace Users.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetUserAsync(string email)
         {
-            var data = await userRepository.GetByMailAsync(email);
-            return Ok(data);
+            User user = await Bus.Execute(new GetUserByMailQuery(email));
+            return Ok(mapper.Map<UserDetailsModel>(user));
         }
     }
 }
