@@ -6,10 +6,12 @@ using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Users.Api.Mapping;
 using Users.CrossCutting.IoC;
+using Users.Infra.Persistence.Context;
 
 namespace Users.Api
 {
@@ -25,6 +27,11 @@ namespace Users.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<DataContext>(
+                opt => opt.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")
+                ));
+
             services.AddAutoMapper();
 
             services.AddSingleton(AutoMapperConfig.RegisterMappings().CreateMapper());

@@ -42,8 +42,7 @@ namespace Users.Domain.CommandHandlers
 
             await userRepository.AddAsync(user);
 
-            if (Commit())
-                await Bus.RaiseEvent(new UserRegisteredEvent(user.Id, user.Email, user.Name));
+            Commit();
         }
     }
 }

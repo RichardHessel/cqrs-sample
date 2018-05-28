@@ -4,8 +4,11 @@ namespace Users.Domain.Entities
 {
     public class User
     {
+        protected User(){}
+
         public User(string name, string email, string password)
         {
+            this.Id = Guid.NewGuid();
             this.Name = name;
             this.Email = email;
             this.HashPassword = password; //TODO: Fazer hash da senha

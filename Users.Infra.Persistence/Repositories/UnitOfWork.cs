@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Users.Domain.Core.Commands;
@@ -8,14 +9,22 @@ namespace Users.Infra.Persistence.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
+        private readonly DbContext context;
+
+        public UnitOfWork(DbContext context)
+        {
+            this.context = context;
+        }
         public CommandResponse Commit()
         {
-            throw new NotImplementedException();
+            int result = context.SaveChanges();
+            return new CommandResponse(result >= 1);
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            context.Dispose();
+            GC.SuppressFinalize(this);
         }
     }
 }

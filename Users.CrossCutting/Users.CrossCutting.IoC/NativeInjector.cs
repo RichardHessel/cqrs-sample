@@ -13,6 +13,8 @@ using Users.Infra.Persistence.Repositories;
 using Users.Domain.QuerySide.Queries.Users;
 using Users.Domain.QuerySide.QueryHandlers.Users;
 using Users.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using Users.Infra.Persistence.Context;
 
 namespace Users.CrossCutting.IoC
 {
@@ -37,8 +39,9 @@ namespace Users.CrossCutting.IoC
             // infra 
             services.AddScoped<IUserRepository, UserRepository>();
 
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<DbContext, DataContext>();
 
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
     }
 }

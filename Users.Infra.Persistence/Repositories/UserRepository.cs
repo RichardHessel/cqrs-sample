@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Users.Domain.Entities;
@@ -9,14 +11,19 @@ namespace Users.Infra.Persistence.Repositories
 {
     public class UserRepository : IUserRepository
     {
+        private DbSet<User> _db;
+        public UserRepository(DbContext context)
+        {
+            _db = context.Set<User>();
+        }
         public Task AddAsync(User user)
         {
-            throw new NotImplementedException();
+            return _db.AddAsync(user);
         }
 
-        public async Task<User> GetByMailAsync(string email)
+        public Task<User> GetByMailAsync(string email)
         {
-            return new User("richard", "richardrodrigues_h@outlook.com", "Teste@123");
+            return _db.Where(u => u.Email == email).FirstOrDefaultAsync();
         }
     }
 }
