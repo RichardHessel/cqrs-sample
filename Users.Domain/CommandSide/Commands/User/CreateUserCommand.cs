@@ -1,4 +1,6 @@
 
+using Users.Domain.Validations.User;
+
 namespace Users.Domain.Commands.User
 {
     public class CreateUserCommand : UserCommand
@@ -7,7 +9,8 @@ namespace Users.Domain.Commands.User
 
         public override bool IsValid()
         {
-            throw new System.NotImplementedException();
+            ValidationResult = new CreateUserValidation().Validate(this);
+            return ValidationResult.IsValid;
         }
     }
 } 
