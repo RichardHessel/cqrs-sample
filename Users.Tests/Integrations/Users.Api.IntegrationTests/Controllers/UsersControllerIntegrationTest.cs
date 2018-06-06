@@ -26,23 +26,30 @@ namespace Users.Api.IntegrationTests.Controllers
         public async Task ShouldBeReturnUser()
         {
             NewUserModel newUser = await CreateUserAsync();
+
             var response = await client.GetAsync(baseUrl + $"?email={newUser.Email}");
             response.EnsureSuccessStatusCode();
+
             User user = JsonConvert.DeserializeObject<User>(await response.Content.ReadAsStringAsync());
-            Assert.NotNull(user);
+
+            Assert.Equal(newUser.Name, user.Name);
+            Assert.Equal(newUser.Email, user.Email);
         }
 
         private async Task<NewUserModel> CreateUserAsync()
         {
             NewUserModel user = new NewUserModel();
             user.Name = "richard";
-            user.Email = "richardrodrigues_h@outlook.com";
+            user.Email = "richard.hessel@outlook.com";
             user.Password = "12354243513d";
 
             var response = await client
                 .PostAsync(baseUrl, new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json"));
+
             string content = await response.Content.ReadAsStringAsync();
+
             response.EnsureSuccessStatusCode();
+
             return user;
         }
     }

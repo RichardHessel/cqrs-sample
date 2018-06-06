@@ -49,7 +49,11 @@ namespace Users.Api.Controllers
         public async Task<IActionResult> GetUserAsync(string email)
         {
             User user = await Bus.Execute(new GetUserByMailQuery(email));
-            return Ok(mapper.Map<UserDetailsModel>(user));
+            var userResult = mapper.Map<UserDetailsModel>(user);
+            if (userResult is null)
+                return NotFound();
+
+            return Ok(userResult);
         }
     }
 }
