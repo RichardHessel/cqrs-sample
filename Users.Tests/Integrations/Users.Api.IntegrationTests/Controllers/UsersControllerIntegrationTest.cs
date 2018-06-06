@@ -1,9 +1,11 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Users.Api.IntegrationTests.Configuration;
+using Users.Api.Models.RegisterUser;
 using Users.Domain.Entities;
 using Xunit;
 using Xunit.Abstractions;
@@ -23,10 +25,25 @@ namespace Users.Api.IntegrationTests.Controllers
         [Fact]
         public async Task ShouldBeReturnUser()
         {
-            var response = await client.GetAsync(baseUrl + "?email=richardrodrigues_h@outlook.com");
+            NewUserModel newUser = await CreateUserAsync();
+            var response = await client.GetAsync(baseUrl + $"?email={newUser.Email}");
             response.EnsureSuccessStatusCode();
             User user = JsonConvert.DeserializeObject<User>(await response.Content.ReadAsStringAsync());
             Assert.NotNull(user);
+        }
+
+        private async Task<NewUserModel> CreateUserAsync()
+        {
+            NewUserModel user = new NewUserModel();
+            user.Name = "richard";
+            user.Email = "richardrodrigues_h@outlook.com";
+            user.Password = "12354243513d";
+
+            var response = await client
+                .PostAsync(baseUrl, new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json"));
+            string content = await response.Content.ReadAsStringAsync();
+            response.EnsureSuccessStatusCode();
+            return user;
         }
     }
 }
