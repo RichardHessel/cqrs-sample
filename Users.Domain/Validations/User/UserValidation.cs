@@ -18,6 +18,7 @@ namespace Users.Domain.Validations
         protected void ValidateEmail()
         {
             RuleFor(u => u.Email)
+                .EmailAddress().WithMessage("EMAIL_FORMAT_INVALID")
                 .NotEmpty().WithMessage("EMAIL_EMPTY")
                 .Length(3, 50).WithMessage("EMAIL_LENGTH_INVALID");
         }
